@@ -1,0 +1,270 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lashes NFT Roadmap</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1>Lashes NFT Roadmap</h1>
+        <p>Click here to Follow our journey to the Lashes Animated Movie!</p>
+    </header>
+
+    <main>
+        <div class="roadmap-container">
+            <div class="roadmap-item" data-year="Now">
+                <div class="roadmap-content">
+                    <h2>Phase 1: NFT Launch</h2>
+                    <p>Cute baby animals with exaggerated long eyelashes are here! Collect your unique Lashes NFT Today!</p>
+                </div>
+                <div class="roadmap-icon">
+                    <img src="images/lash_icon_1.png" alt="NFT Launch Icon">
+                </div>
+            </div>
+
+            <div class="roadmap-item" data-year="Q1 2024">
+                <div class="roadmap-content">
+                    <h2>Phase 2: Community Building</h2>
+                    <p>Join our vibrant community! Participate in contests, giveaways, and exclusive events.</p>
+                </div>
+                <div class="roadmap-icon">
+                    <img src="images/community_icon.png" alt="Community Icon">
+                </div>
+            </div>
+
+            <div class="roadmap-item" data-year="Q2 2024">
+                <div class="roadmap-content">
+                    <h2>Phase 3: Merchandise Store</h2>
+                    <p>Get your Lashes merchandise! T-shirts, plushies, and more featuring your favorite characters.</p>
+                </div>
+                 <div class="roadmap-icon">
+                    <img src="images/merch_icon.png" alt="Merchandise Icon">
+                </div>
+            </div>
+
+            <div class="roadmap-item" data-year="Q4 2024">
+                <div class="roadmap-content">
+                    <h2>Phase 4: Animated Short</h2>
+                    <p>A sneak peek into the world of Lashes! Watch our first animated short film.</p>
+                </div>
+                <div class="roadmap-icon">
+                    <img src="images/movie_icon.png" alt="Animated Short Icon">
+                </div>
+            </div>
+
+            <div class="roadmap-item" data-year="2025">
+                <div class="roadmap-content">
+                    <h2>Phase 5: Lashes Animated Movie</h2>
+                    <p>The grand finale! The Lashes animated movie hits the big screen. Get ready for an adventure!</p>
+                </div>
+                <div class="roadmap-icon">
+                    <img src="images/movie_icon.png" alt="Movie Icon">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Lashes NFT. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to create animated bubbles
+    function createBubble() {
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+
+        const size = Math.random() * 30 + 20; // Random size between 20px and 50px
+        bubble.style.width = `${size}px`;
+        bubble.style.height = `${size}px`;
+
+        bubble.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+        bubble.style.bottom = '0px';
+
+        bubble.style.animationDuration = `${Math.random() * 3 + 3}s`; // Random duration between 3s and 6s
+
+        document.querySelector('main').appendChild(bubble);
+
+        bubble.addEventListener('animationend', function() {
+            bubble.remove();
+        });
+    }
+
+    // Create bubbles every 0.5 seconds
+    setInterval(createBubble, 500);
+
+     // GSAP Timeline for header animation
+     gsap.fromTo("header h1", 
+        {opacity: 0, y: -50},
+        {opacity: 1, y: 0, duration: 1, ease: "power2.out"}
+    );
+
+    gsap.fromTo("header p", 
+        {opacity: 0, y: 30},
+        {opacity: 1, y: 0, duration: 1, delay: 0.5, ease: "power2.out"}
+    );
+    
+    // Intersection Observer for roadmap items animation
+    const roadmapItems = document.querySelectorAll('.roadmap-item');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target); // Stop observing after animating once
+            }
+        });
+    }, {
+        threshold: 0.3 // Trigger when 30% of the element is visible
+    });
+
+    roadmapItems.forEach(item => {
+        observer.observe(item);
+    });
+});
+</script>
+
+
+
+
+<style>
+
+
+body {
+    font-family: 'Bubblegum Sans', cursive;
+    background-color: #ffe6f2; /* Light pink background */
+    margin: 0;
+    padding: 0;
+    color: #333;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+header {
+    background-color: #ffb3e6; /* A brighter pink for the header */
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+header p {
+    font-size: 1.2em;
+}
+
+main {
+    padding: 20px;
+    position: relative; /* For absolute positioning of animated elements */
+    min-height: 80vh; /* Ensure main takes up at least 80% of the viewport height */
+}
+
+.roadmap-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.roadmap-item {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 20px 0;
+    padding: 20px;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+}
+
+.roadmap-item:hover {
+    transform: translateY(-5px);
+}
+
+.roadmap-content h2 {
+    color: #e60073; /* A vibrant pink for headings */
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.roadmap-content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+.roadmap-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 60px;
+}
+
+.roadmap-icon img {
+    max-width: 100%;
+    height: auto;
+}
+
+footer {
+    background-color: #ffb3e6;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Animated Background Elements */
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: float 4s infinite linear;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 0.4;
+    }
+    100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+}
+
+/* Animation for roadmap items */
+.roadmap-item {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s cubic-bezier(.08,.59,.29,.99);
+}
+
+.roadmap-item.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
